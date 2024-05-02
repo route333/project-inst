@@ -1,0 +1,29 @@
+{
+  "name": "project-inst",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url /project-inst",
+    "pre-start": "npm run build",
+    "server": "npx json-server ./src/db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/route333/project-inst.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/route333/project-inst/issues"
+  },
+  "homepage": "https://github.com/route333/project-inst#readme",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "express": "^4.19.2",
+    "handlebars": "^4.7.8",
+    "json-server": "^1.0.0-alpha.23",
+    "parcel": "^2.12.0"
+  }
+}

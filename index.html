@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <svg class="header__logo">
+        <use href="./src/symbol-defs.svg#icon-instagram"></use>
+      </svg>
+      <a class="header__search" href="./src/search.html">🔍︎ search</a>
+      <p class="header__text">welcome to Instagram Threads</p>
+    </header>
+
+    <main>
+      <div class="posts">
+        <div class="posts__decoration">
+          <ul class="posts-list"></ul>
+        </div>
+      </div>
+      <div class="modal" id="modal">
+        <div class="modal-content">
+          <button class="close">&times;</button>
+          <input
+            class="input"
+            type="text"
+            id="username"
+            placeholder="Your name"
+          />
+          <textarea
+            class="input"
+            id="comment-text"
+            placeholder="Enter your comment"
+          ></textarea>
+          <button id="add-comment-btn">Add Comment</button>
+        </div>
+      </div>
+      <div class="modal" id="edit-modal">
+        <div class="modal-content">
+          <button class="close" id="cancel-edit-btn">&times;</button>
+          <input
+            class="input"
+            type="text"
+            id="edit-post-text"
+            placeholder="Edit your post"
+          />
+          <button id="save-edit-btn">Save</button>
+        </div>
+      </div>
+
+      <div class="add-post">
+        <button class="add-post__btn">+</button>
+      </div>
+      <div id="addPostModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add a new post</h2>
+          <form id="new-post-form">
+            <label for="username">Your name:</label>
+            <input id="add-post__name" type="text" name="username" required>
+            <label for="post-text">Post text:</label>
+            <input id="add-post__text" name="post-text">
+            <button type="submit">Add Post</button>
+          </form>
+        </div>
+      </div>
+      <footer>
+        <div class="footer__text-decoration">
+          <p class="footer__text">Meta</p>
+          <p class="footer__text">Інформація</p>
+          <p class="footer__text">Блоґ</p>
+          <p class="footer__text">Вакансії</p>
+          <p class="footer__text">Довідка</p>
+          <p class="footer__text">API</p>
+          <p class="footer__text">Конфіденційність</p>
+          <p class="footer__text">Умови</p>
+          <p class="footer__text">Розташування</p>
+          <p class="footer__text">Instagram Lite</p>
+          <p class="footer__text">Threads</p>
+          <p class="footer__text">
+            Завантаження контактів і люди, що не є користувачами
+          </p>
+          <p class="footer__text">Meta Verified</p>
+          <p class="footer__text">Українська</p>
+          <p class="footer__text">© Instagram from Meta, 2024</p>
+        </div>
+      </footer>
+    </main>
+    <script src="./src/index.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+  </body>
+</html>
