@@ -60,7 +60,7 @@ function addComment() {
     if (commentsContainer) {
       commentsContainer.innerHTML += commentHTML;
     } else {
-      console.error("commentsContainer is null");
+      console.error("error");
     }
   }
 }
@@ -168,10 +168,10 @@ async function deletePost(postId) {
             const updatedPosts = storedPosts.filter(post => post.id !== postId);
             savePosts(updatedPosts);
         } else {
-            throw new Error("Faile");
+            throw new Error("Fail");
         }
     } catch (error) {
-        console.error("Error deleting post", error);
+        console.error("Error delete", error);
     }
 }
 
@@ -213,14 +213,17 @@ document.addEventListener("DOMContentLoaded", function() {
           li.classList = "post-item";
           li.dataset.postId = post.id;
           li.innerHTML = `
-            <h1 class="user">${post.userName}</h1>
-            <p class="post-info">${post.info}</p>
-           ...;
+              <h1 class="user">${post.userName}</h1>
+              <p class="post-info">${post.info}</p>
+              <button class="edit-post-btn">Edit Post</button>
+              <button class="delete-post-btn">Delete Post</button>
+              <button class="comment-btn">add comment</button>
+              <div class="comments-container"></div>
           `;
           postsList.appendChild(li);
         });
       } catch (error) {
-        console.error("Error searching posts:", error);
+        console.error("Error searching:", error);
       }
     }
   });
