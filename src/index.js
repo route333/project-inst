@@ -4,53 +4,27 @@ const closeBtn = document.querySelector(".close");
 const addCommentBtn = document.getElementById("add-comment-btn");
 const usernameInput = document.getElementById("username");
 const commentTextInput = document.getElementById("comment-text");
-
-function savePosts(posts) {
-    localStorage.setItem("posts", JSON.stringify(posts));
-  }
-  
-  function loadPosts() {
-    return JSON.parse(localStorage.getItem("posts")) || [];
-  }
+const searchInput = document.querySelector(".search-input");
   
   async function createStories() {
     const server = `http://localhost:3000/posts`;
     try {
-      const storedPosts = loadPosts();
-      if (storedPosts.length > 0) {
-        storedPosts.forEach((serv) => {
-          const li = document.createElement("li");
-          li.classList = "post-item";
-          li.dataset.postId = serv.id;
-          li.innerHTML = `
-                    <h1 class="user">${serv.userName}</h1>
-                    <p class="post-info">${serv.info}</p>
-                    <button class="edit-post-btn">Edit Post</button>
-                    <button class="delete-post-btn">Delete Post</button>
-                    <button class="comment-btn">add comment</button>
-                    <div class="comments-container"></div>
-                `;
-          postsList.appendChild(li);
-        });
-      } else {
-        const response = await fetch(server);
-        const data = await response.json();
-        data.forEach((serv) => {
-          const li = document.createElement("li");
-          li.classList = "post-item";
-          li.dataset.postId = serv.id;
-          li.innerHTML = `
-                    <h1 class="user">${serv.userName}</h1>
-                    <p class="post-info">${serv.info}</p>
-                    <button class="edit-post-btn">Edit Post</button>
-                    <button class="delete-post-btn">Delete Post</button>
-                    <button class="comment-btn">add comment</button>
-                    <div class="comments-container"></div>
-                `;
-          postsList.appendChild(li);
-        });
-        savePosts(data);
-      }
+      const response = await fetch(server);
+      const data = await response.json();
+      data.forEach((serv) => {
+        const li = document.createElement("li");
+        li.classList = "post-item";
+        li.dataset.postId = serv.id;
+        li.innerHTML = `
+              <h1 class="user">${serv.userName}</h1>
+              <p class="post-info">${serv.info}</p>
+              <button class="edit-post-btn">Edit Post</button>
+              <button class="delete-post-btn">Delete Post</button>
+              <button class="comment-btn">add comment</button>
+              <div class="comments-container"></div>
+          `;
+        postsList.appendChild(li);
+      });
     } catch (error) {
       console.error("error create:", error);
     }
@@ -194,9 +168,59 @@ async function deletePost(postId) {
             const updatedPosts = storedPosts.filter(post => post.id !== postId);
             savePosts(updatedPosts);
         } else {
-            throw new Error("Failed to delete post");
+            throw new Error("Faile");
         }
     } catch (error) {
         console.error("Error deleting post", error);
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  
+    searchInput.addEventListener("input", _.debounce(handleSearch, 500));
+  
+    let searchQuery = "";
+  
+    function handleSearch() {
+      const inputValue = searchInput.value.trim();
+  
+      if (inputValue === "") {
+        createStories();
+        return;
+      }
+  
+      searchQuery = inputValue;
+      postsList.innerHTML = "";
+      searchPosts();
+    }
+  
+    async function searchPosts() {
+      const server = `http://localhost:3000/posts`;
+      try {
+        const response = await fetch(server);
+        const data = await response.json();
+  
+        const filteredPosts = data.filter((post) => {
+          const userName = post.userName.toLowerCase();
+          const info = post.info.toLowerCase();
+          const query = searchQuery.toLowerCase();
+  
+          return userName.includes(query) || info.includes(query);
+        });
+  
+        filteredPosts.forEach((post) => {
+          const li = document.createElement("li");
+          li.classList = "post-item";
+          li.dataset.postId = post.id;
+          li.innerHTML = `
+            <h1 class="user">${post.userName}</h1>
+            <p class="post-info">${post.info}</p>
+           ...;
+          `;
+          postsList.appendChild(li);
+        });
+      } catch (error) {
+        console.error("Error searching posts:", error);
+      }
+    }
+  });

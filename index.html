@@ -16,8 +16,8 @@
       <svg class="header__logo">
         <use href="./src/symbol-defs.svg#icon-instagram"></use>
       </svg>
-      <a class="header__search" href="./src/search.html">🔍︎ search</a>
       <p class="header__text">welcome to Instagram Threads</p>
+      <input class="search-input" type="text" placeholder="🔍︎ search post">
     </header>
 
     <main>
@@ -63,12 +63,12 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Add a new post</h2>
-          <form id="new-post-form">
+          <form class="add-post__form" id="new-post-form">
             <label for="username">Your name:</label>
             <input id="add-post__name" type="text" name="username" required>
             <label for="post-text">Post text:</label>
             <input id="add-post__text" name="post-text">
-            <button type="submit">Add Post</button>
+            <button class="add-post__sumbit" type="submit">Add Post</button>
           </form>
         </div>
       </div>
