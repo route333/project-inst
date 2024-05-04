@@ -137,9 +137,6 @@ function addNewPost() {
                     <div class="comments-container"></div>
                 `;
           postsList.appendChild(li);
-          const storedPosts = loadPosts();
-          storedPosts.push(data);
-          savePosts(storedPosts); 
         })
        .catch((error) => {
           console.error("Error:", error);
@@ -160,16 +157,9 @@ async function deletePost(postId) {
         const response = await fetch(`${server}/${postId}`, {
             method: "DELETE",
         });
-        if (response.ok) {
             alert("Post deleted");
             postsList.innerHTML = "";
             createStories();
-            const storedPosts = loadPosts();
-            const updatedPosts = storedPosts.filter(post => post.id !== postId);
-            savePosts(updatedPosts);
-        } else {
-            throw new Error("Fail");
-        }
     } catch (error) {
         console.error("Error delete", error);
     }
